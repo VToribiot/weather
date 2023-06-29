@@ -35,9 +35,10 @@ class _loadingPageState extends State<loadingPage> {
       )
           : Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(position.latitude.toString()),
-          Text(position.longitude.toString()),
+          Text(position.latitude.toString(), style : TextStyle(fontSize: 36.0)),
+          Text(position.longitude.toString(), style: TextStyle(fontSize: 36.0),),
         ],
       ),
     );
