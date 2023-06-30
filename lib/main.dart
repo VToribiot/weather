@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:wae/location.dart';
-import 'package:wae/city.dart';
+import 'package:wae/screens/location.dart';
+import 'package:wae/screens/city.dart';
 
-import 'loading.dart';
+import 'screens/loading.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: Text('Material App Bar'),
         ),
-        body:loadingPage()
+        body: loadingPage()
       ),
     );
   }
