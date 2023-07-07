@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wae/screens/city.dart';
+import '../services/networking.dart';
 import '../services/weatherModel.dart';
 import 'package:wae/constants.dart';
 
@@ -27,16 +28,25 @@ class _LocationScreenState extends State<LocationScreen>{
 
   void updateUI(dynamic weatherData)
   {
-    double temp = weatherData['main']['temp'];
-    temperature = temp.toInt();
-    var condition = weatherData['weather'][0]['id'];
-    cityName = weatherData['name'];
-    weatherIcon = weather.getWeatherIcon(condition);
-    weatherTxt = weather.getMessage(temp.toInt());
+    setState(() {
+      if(weatherData == null){
+        temperature = 0;
+        cityName = 'No city';
+        weatherIcon = 'Error';
+        weatherTxt = 'Unable to get weather Data';
+      }
+      double temp = weatherData['main']['temp'];
+      temperature = temp.toInt();
+      var condition = weatherData['weather'][0]['id'];
+      cityName = weatherData['name'];
+      weatherIcon = weather.getWeatherIcon(condition);
+      weatherTxt = weather.getMessage(temp.toInt());
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -57,7 +67,12 @@ class _LocationScreenState extends State<LocationScreen>{
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      Weather weather = Weather();
+                      var w = await weather.getWeatherLocation();
+
+                      updateUI(w);
+                    },
                     child: Icon(
                       Icons.near_me,
                       size: 50.0,

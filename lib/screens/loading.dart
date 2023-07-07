@@ -12,7 +12,6 @@ class loadingPage extends StatefulWidget {
 }
 
 class _loadingPageState extends State<loadingPage> {
-  Location location = Location();
 
   @override
   void initState() {
@@ -21,14 +20,11 @@ class _loadingPageState extends State<loadingPage> {
   }
 
   void _getData() async {
-    await location.getLocation();
 
     Weather weather = Weather();
-    var w = await weather.getWeatherLocation(location.latitude.toString(), location.longitude.toString());
+    var w = await weather.getWeatherLocation();
     Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
 
-    print("Latitude: ${location.latitude}, longitude: ${location.longitude}");
-    print("Weather: ${w}");
 
     Navigator.push(context as BuildContext, MaterialPageRoute(builder: (context){
       return LocationScreen(locationWeather: w);
