@@ -23,8 +23,8 @@ class _loadingPageState extends State<loadingPage> {
   void _getData() async {
     await location.getLocation();
 
-    Weather weather = Weather(lat: location.latitude.toString(), lon: location.longitude.toString());
-    var w = await weather.getWeather();
+    Weather weather = Weather();
+    var w = await weather.getWeatherLocation(location.latitude.toString(), location.longitude.toString());
     Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
 
     print("Latitude: ${location.latitude}, longitude: ${location.longitude}");

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wae/screens/city.dart';
 import '../services/weatherModel.dart';
 import 'package:wae/constants.dart';
 
@@ -63,7 +64,11 @@ class _LocationScreenState extends State<LocationScreen>{
                     ),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context as BuildContext, MaterialPageRoute(builder: (context){
+                        return CityScreen();
+                      }));
+                    },
                     child: Icon(
                       Icons.location_city,
                       size: 50.0,
@@ -93,7 +98,7 @@ class _LocationScreenState extends State<LocationScreen>{
               Padding(
                 padding: EdgeInsets.only(right: 15.0),
                 child: Text(
-                  weatherTxt!,
+                  "$weatherTxt! in $cityName",
                   textAlign: TextAlign.right,
                   style: KMessageTextStyle
                 ),
