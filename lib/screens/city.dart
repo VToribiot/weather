@@ -12,7 +12,7 @@ class _LocationCityScreen extends State<CityScreen>{
   @override
   Widget build(BuildContext buildContext){
 
-    var cityName;
+    String? cityName;
 
     return Scaffold(
         body: Container(
@@ -55,13 +55,7 @@ class _LocationCityScreen extends State<CityScreen>{
                   ),
                 ),
                 TextButton(onPressed: () async {
-                  Weather weather = Weather();
-                  var w = await weather.getWeatherCity(cityName);
-                  Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
-
-                  Navigator.push(context as BuildContext, MaterialPageRoute(builder: (context){
-                    return LocationScreen(locationWeather: w);
-                  }));
+                  Navigator.pop(context, cityName);
                 }, child: Text('Get Weather', style: TextStyle(fontSize: 36.0),),)
               ]
             )

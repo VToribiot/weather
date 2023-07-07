@@ -9,7 +9,6 @@ import 'package:wae/services/locator.dart';
 class Weather {
   Weather();
 
-
   Future<dynamic> getWeatherLocation() async {
     Location location = Location();
     await location.getLocation();
@@ -25,7 +24,7 @@ class Weather {
     }
   }
 
-  Future<dynamic> getWeatherCity(String cityName) async {
+  Future<dynamic> getWeatherCity(String? cityName) async {
     try {
       var url = Uri.parse("https://api.openweathermap.org/data/2.5/weather?q=$cityName&appid=$apikey&units=metric");
       var response = await http.get(url);

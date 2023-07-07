@@ -19,6 +19,8 @@ class _LocationScreenState extends State<LocationScreen>{
   String? weatherTxt;
   var cityName;
 
+  Weather w = Weather();
+
   @override
   void initState() {
     // TODO: implement initState
@@ -79,10 +81,14 @@ class _LocationScreenState extends State<LocationScreen>{
                     ),
                   ),
                   TextButton(
-                    onPressed: () {
-                      Navigator.push(context as BuildContext, MaterialPageRoute(builder: (context){
+                    onPressed: () async {
+                      var result = await Navigator.push(context as BuildContext, MaterialPageRoute(builder: (context){
                         return CityScreen();
                       }));
+                      if (result != null){
+                        var cityWeather = await w.getWeatherCity(result);
+                        updateUI(cityWeather);
+                      }
                     },
                     child: Icon(
                       Icons.location_city,
